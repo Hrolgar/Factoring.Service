@@ -2,21 +2,20 @@ using Factoring.Service.Application.Invoices.Commands;
 using Factoring.Service.Application.Invoices.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Factoring.Service.Application.Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Factoring.Service.Api.Controllers;
 
-[ApiController] 
+[ApiController, Authorize] 
 [Route("api/invoices")]
 public class InvoicesController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator _mediator = mediator;
-
     // GET /api/invoices
     [HttpGet]
     public async Task<IActionResult> GetInvoices()
     {
         var query = new GetAllInvoicesQuery();
-        var result = await _mediator.SendAsync(query);
+        var result = await mediator.SendAsync(query);
 
         return Ok(result);
     }
@@ -26,7 +25,7 @@ public class InvoicesController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetInvoicesById(Guid id)
     {
         var query = new GetInvoiceByIdQuery (id);
-        var result = await _mediator.SendAsync(query);
+        var result = await mediator.SendAsync(query);
         
         if (result == null) return NotFound();
         
@@ -39,7 +38,7 @@ public class InvoicesController(IMediator mediator) : ControllerBase
     {
         var command = new FinanceInvoiceCommand(id);
         // await _mediator.Send(command);
-        await _mediator.SendAsync(command);
+        await mediator.SendAsync(command);
 
         Console.WriteLine($"Invoice {id} financed via API.");
         
@@ -50,7 +49,7 @@ public class InvoicesController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateInvoice([FromBody]CreateInvoiceCommand command)
     {
-        var createdInvoiceId = await _mediator.SendAsync(command);
+        var createdInvoiceId = await mediator.SendAsync(command);
 
         return CreatedAtAction(
             nameof(GetInvoicesById),
@@ -67,7 +66,7 @@ public class InvoicesController(IMediator mediator) : ControllerBase
         if (id != command.Id)
             return BadRequest("ID in URL does not match ID in body.");
         
-        var result = await _mediator.SendAsync(command);
+        var result = await mediator.SendAsync(command);
         if (!result) return NotFound();
         
         return NoContent();
@@ -78,7 +77,7 @@ public class InvoicesController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> DeleteInvoice(Guid id)
     {
         var command = new DeleteInvoiceCommand { Id = id };
-        var result = await _mediator.SendAsync(command);
+        var result = await mediator.SendAsync(command);
         if (!result) return NotFound();
         
         return NoContent();

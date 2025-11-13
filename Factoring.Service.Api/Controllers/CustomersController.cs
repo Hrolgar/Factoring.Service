@@ -1,11 +1,12 @@
 using Factoring.Service.Application.Common;
 using Factoring.Service.Application.Customers.Commands;
 using Factoring.Service.Application.Customers.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Factoring.Service.Api.Controllers;
 
-[ApiController] 
+[ApiController, Authorize] 
 [Route("api/customers")]
 public class CustomersController(IMediator mediator) : ControllerBase
 {

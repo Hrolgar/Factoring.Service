@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
+      <UserSecretsId>3903c67c-e242-40c7-801e-a2ac6d319049</UserSecretsId>
+  </PropertyGroup>
     
     <ItemGroup>
         <ProjectReference Include="..\Factoring.Service.Application\Factoring.Service.Application.csproj" />
@@ -12,6 +13,7 @@
     </ItemGroup>
     
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.11" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
         <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="10.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.6" />
