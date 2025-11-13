@@ -1,7 +1,8 @@
+using System.Reflection;
 using Factoring.Service.Application.Common;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-using Factoring.Service.Infrastructure.Mediator;
+
+namespace Factoring.Service.Infrastructure.Mediator;
 
 public static class MediatorRegistrationExtensions
 {

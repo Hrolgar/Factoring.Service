@@ -1,4 +1,3 @@
-using Factoring.Service.Application.Common;
 using Factoring.Service.Application.Invoices.Queries;
 using Factoring.Service.Application.Mappings;
 using Factoring.Service.Core.Interfaces;
@@ -27,16 +26,12 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// builder.Services.AddScoped<IMediator, FactoringMediator>();
-builder.Services.AddFactoringMediator(typeof(GetInvoiceByIdQueryHandler).Assembly);
+builder.Services.AddFactoringMediator(typeof(Factoring.Service.Application.Common.IMediator).Assembly);
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-// builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
-// builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICreditCheckService, CreditCheckService>();
 
-// builder.Services.AddMediatR(cfg =>
-//     cfg.RegisterServicesFromAssembly(typeof(GetInvoiceByIdQueryHandler).Assembly));
+
 
 builder.Services.AddAutoMapper(cfg => { },
     typeof(AutoMapperProfile).Assembly);
@@ -45,9 +40,6 @@ var retryPolicy = HttpPolicyExtensions
     .HandleTransientHttpError()
     .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(retryAttempt));
 
-// var circuitBreakerPolicy = HttpPolicyExtensions
-//     .HandleTransientHttpError()
-//     .CircuitBreakerAsync(2, TimeSpan.FromSeconds(10));
 
 var timeoutPolicy = Policy.TimeoutAsync<HttpResponseMessage>(2); // 2-second timeout
 

@@ -5,7 +5,13 @@ namespace Factoring.Service.Infrastructure.Mediator;
 
 public class FactoringMediator(IServiceProvider provider) : IMediator
 {
-    // Handles: IRequest<TResult>
+    /// <summary>
+    ///     Sends a request/command with a return value
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="ct"></param>
+    /// <typeparam name="TResult"></typeparam>
+    /// <returns></returns>
     public Task<TResult> Send<TResult>(IRequest<TResult> request, CancellationToken ct = default)
     {
         var handlerType = typeof(IRequestHandler<,>)
@@ -15,7 +21,12 @@ public class FactoringMediator(IServiceProvider provider) : IMediator
         return handler.Handle((dynamic)request, ct);
     }
 
-    // Handles: IRequest (void commands)
+    /// <summary>
+    ///    Sends a request/command without a return value
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="ct"></param>
+    /// <returns></returns>
     public Task Send(IRequest request, CancellationToken ct = default)
     {
         var handlerType = typeof(IRequestHandler<>)
