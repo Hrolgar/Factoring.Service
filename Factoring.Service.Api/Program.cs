@@ -32,10 +32,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICreditCheckService, CreditCheckService>();
 
 
-
-builder.Services.AddAutoMapper(cfg => { },
-    typeof(AutoMapperProfile).Assembly);
-
 var retryPolicy = HttpPolicyExtensions
     .HandleTransientHttpError()
     .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(retryAttempt));

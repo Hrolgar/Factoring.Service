@@ -8,6 +8,7 @@ public class InvoiceDto
     public string? InvoiceNumber { get; set; }
     public Guid CustomerId { get; set; }
     public decimal Amount { get; set; }
+    public string? Currency { get; set; }
     public DateTime DueDate { get; set; }
     public DateTime IssuedDate { get; set; }
     public DateTime CreatedOn { get; set; }
