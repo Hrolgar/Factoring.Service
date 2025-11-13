@@ -12,7 +12,7 @@ public class FactoringMediator(IServiceProvider provider) : IMediator
     /// <param name="ct"></param>
     /// <typeparam name="TResult"></typeparam>
     /// <returns></returns>
-    public Task<TResult> Send<TResult>(IRequest<TResult> request, CancellationToken ct = default)
+    public Task<TResult> SendAsync<TResult>(IRequest<TResult> request, CancellationToken ct = default)
     {
         var handlerType = typeof(IRequestHandler<,>)
             .MakeGenericType(request.GetType(), typeof(TResult));
@@ -27,7 +27,7 @@ public class FactoringMediator(IServiceProvider provider) : IMediator
     /// <param name="request"></param>
     /// <param name="ct"></param>
     /// <returns></returns>
-    public Task Send(IRequest request, CancellationToken ct = default)
+    public Task SendAsync(IRequest request, CancellationToken ct = default)
     {
         var handlerType = typeof(IRequestHandler<>)
             .MakeGenericType(request.GetType());

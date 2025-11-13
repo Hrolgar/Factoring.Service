@@ -1,3 +1,4 @@
+using Factoring.Service.Api.Middleware;
 using Factoring.Service.Application.Invoices.Queries;
 using Factoring.Service.Application.Mappings;
 using Factoring.Service.Core.Interfaces;
@@ -55,8 +56,8 @@ builder.Services.AddHttpClient<IExchangeRateService, ExchangeRateService>(client
     .AddPolicyHandler(timeoutPolicy);
 
 var app = builder.Build();
-
 // Middleware
+app.UseMiddleware<ErrorHandlingMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

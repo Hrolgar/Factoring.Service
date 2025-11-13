@@ -15,20 +15,27 @@ public static class MediatorRegistrationExtensions
         var handlerInterface = typeof(IRequestHandler<,>);
         
         var types = assemblyToScan.GetTypes()
-            .Where(t => !t.IsAbstract && !t.IsInterface)
-            .Select(t => new {
-                Type = t,
-                Interfaces = t.GetInterfaces()
-            })
+            .Where(t => t is { IsAbstract: false, IsInterface: false })
             .ToList();
 
-        foreach (var t in types)
+        foreach (var type in types)
         {
-            foreach (var i in t.Interfaces)
+            foreach (var interace in type.GetInterfaces())
             {
-                if (i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface)
+                if (!interace.IsGenericType) continue;
+
+                var genericDef = interace.GetGenericTypeDefinition();
+
+                // Generic request handler: IRequestHandler<TRequest, TResult>
+                if (genericDef == typeof(IRequestHandler<,>))
                 {
-                    services.AddScoped(i, t.Type);
+                    services.AddScoped(interace, type);
+                }
+
+                // Non-generic request handler: IRequestHandler<TRequest>
+                if (genericDef == typeof(IRequestHandler<>))
+                {
+                    services.AddScoped(interace, type);
                 }
             }
         }

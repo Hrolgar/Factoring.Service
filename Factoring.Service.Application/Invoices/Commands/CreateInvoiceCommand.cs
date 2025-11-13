@@ -1,4 +1,5 @@
 using Factoring.Service.Application.Common;
+using Factoring.Service.Application.Exceptions;
 using Factoring.Service.Core.Interfaces;
 using Factoring.Service.Core.Models;
 
@@ -18,7 +19,7 @@ public class CreateInvoiceCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
     {
         var customer = await unitOfWork.Customers.GetByIdAsync(request.CustomerId);
         if (customer == null)
-            throw new InvalidOperationException($"Customer {request.CustomerId} does not exist.");
+            throw new NotFoundException(nameof(Customer), request.CustomerId);
         var invoice = new Invoice
         {
             Id = Guid.NewGuid(),

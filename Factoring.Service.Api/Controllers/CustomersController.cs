@@ -14,9 +14,7 @@ public class CustomersController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetCustomerById(Guid id)
     {
         var query = new GetCustomerById(id);
-        var result = await mediator.Send(query);
-        
-        if (result == null) return NotFound();
+        var result = await mediator.SendAsync(query);
         
         return Ok(result);
     }
@@ -26,7 +24,7 @@ public class CustomersController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetCustomers()
     {
         var query = new GetAllCustomersQuery();
-        var result = await mediator.Send(query);
+        var result = await mediator.SendAsync(query);
         
         return Ok(result);
     }
@@ -35,7 +33,7 @@ public class CustomersController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
     {
-        var createdCustomerId = await mediator.Send(request);
+        var createdCustomerId = await mediator.SendAsync(request);
         
         return CreatedAtAction(
             nameof(GetCustomerById),

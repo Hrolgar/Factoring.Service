@@ -1,6 +1,7 @@
 using Factoring.Service.Core.Interfaces;
 using Factoring.Service.Core.Interfaces.IExternalServices;
 using Factoring.Service.Application.Common;
+using Factoring.Service.Application.Exceptions;
 
 namespace Factoring.Service.Application.Invoices.Commands;
 
@@ -13,11 +14,11 @@ public class FinanceInvoiceCommandHandler(IUnitOfWork unitOfWork, ICreditCheckSe
     {
         var invoice = await unitOfWork.Invoices.GetByIdAsync(request.Id);
         if (invoice == null)
-            throw new InvalidOperationException($"Invoice {request.Id} does not exist.");
+            throw new NotFoundException(nameof(Core.Models.Invoice), request.Id);
         
         var isCreditWorthy = await creditCheckService.IsCustomerCreditWorthyAsync(invoice.CustomerId);
         if (!isCreditWorthy) 
-            throw new InvalidOperationException($"Customer {invoice.CustomerId} is not creditworthy.");
+            throw new ValidationException($"Customer ({invoice.CustomerId}) credit score is too low.");
 
         if (invoice.Currency is not null && invoice.Currency != "USD")
         {
