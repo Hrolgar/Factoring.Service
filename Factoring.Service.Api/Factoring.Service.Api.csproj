@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\Factoring.Service.Application\Factoring.Service.Application.csproj" />
+        <ProjectReference Include="..\Factoring.Service.Core\Factoring.Service.Core.csproj" />
+        <ProjectReference Include="..\Factoring.Service.Infrastructure\Factoring.Service.Infrastructure.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="10.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.6" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.6" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6" />
+    </ItemGroup>
+</Project>
