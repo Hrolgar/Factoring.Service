@@ -1,7 +1,6 @@
+using Factoring.Service.Application.Common;
 using Factoring.Service.Application.Customers.Commands;
 using Factoring.Service.Application.Customers.Queries;
-using Factoring.Service.Application.Invoices.Queries;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Factoring.Service.Api.Controllers;
@@ -22,11 +21,21 @@ public class CustomersController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     
+    // GET /api/customers
+    [HttpGet]
+    public async Task<IActionResult> GetCustomers()
+    {
+        var query = new GetAllCustomersQuery();
+        var result = await mediator.Send(query);
+        
+        return Ok(result);
+    }
+    
     // Post /api/customers/create
     [HttpPost]
-    public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand command)
+    public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
     {
-        var createdCustomerId = await mediator.Send(command);
+        var createdCustomerId = await mediator.Send(request);
         
         return CreatedAtAction(
             nameof(GetCustomerById),

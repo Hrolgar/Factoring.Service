@@ -1,9 +1,11 @@
+using Factoring.Service.Application.Common;
 using Factoring.Service.Application.Invoices.Queries;
 using Factoring.Service.Application.Mappings;
 using Factoring.Service.Core.Interfaces;
 using Factoring.Service.Core.Interfaces.IExternalServices;
 using Factoring.Service.Infrastructure.Data;
 using Factoring.Service.Infrastructure.ExternalServices.Rest;
+using Factoring.Service.Infrastructure.Mediator;
 using Factoring.Service.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Polly;
@@ -25,13 +27,16 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// builder.Services.AddScoped<IMediator, FactoringMediator>();
+builder.Services.AddFactoringMediator(typeof(GetInvoiceByIdQueryHandler).Assembly);
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 // builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICreditCheckService, CreditCheckService>();
 
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(GetInvoiceByIdQueryHandler).Assembly));
+// builder.Services.AddMediatR(cfg =>
+//     cfg.RegisterServicesFromAssembly(typeof(GetInvoiceByIdQueryHandler).Assembly));
 
 builder.Services.AddAutoMapper(cfg => { },
     typeof(AutoMapperProfile).Assembly);

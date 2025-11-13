@@ -1,14 +1,15 @@
+using Factoring.Service.Application.Common;
 using Factoring.Service.Core.Interfaces;
 using Factoring.Service.Core.Models;
-using MediatR;
 
 namespace Factoring.Service.Application.Customers.Commands;
 
-public record CreateCustomerCommand(string Name, string? OrganizationNumber) : IRequest<Guid>;
+// public record CreateCustomerCommand(string Name, string? OrganizationNumber) : IRequest<Guid>;
+public record CreateCustomerRequest(string Name, string? OrganizationNumber) : IRequest<Guid>;
 
-public class CreateCustomerCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<CreateCustomerCommand, Guid>
+public class CreateCustomerRequestHandler(IUnitOfWork unitOfWork) : IRequestHandler<CreateCustomerRequest, Guid>
 {
-    public async Task<Guid> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
     {
         var customer = new Customer
         {

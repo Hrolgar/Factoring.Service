@@ -1,6 +1,6 @@
 using Factoring.Service.Core.Interfaces;
 using Factoring.Service.Core.Interfaces.IExternalServices;
-using MediatR;
+using Factoring.Service.Application.Common;
 
 namespace Factoring.Service.Application.Invoices.Commands;
 
@@ -31,4 +31,6 @@ public class FinanceInvoiceCommandHandler(IUnitOfWork unitOfWork, ICreditCheckSe
         Console.WriteLine($"Invoice {invoice.Id} financed. Registration ID: {registrationId}");
         await unitOfWork.CompleteAsync();
     }
+
+
 }

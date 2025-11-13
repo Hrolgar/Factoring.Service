@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 using Factoring.Service.Core.Interfaces;
-using MediatR;
+using Factoring.Service.Application.Common;
 
 namespace Factoring.Service.Application.Invoices.Commands;
 

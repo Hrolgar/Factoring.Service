@@ -1,7 +1,7 @@
 using AutoMapper;
+using Factoring.Service.Application.Common;
 using Factoring.Service.Application.Dtos;
 using Factoring.Service.Core.Interfaces;
-using MediatR;
 
 namespace Factoring.Service.Application.Customers.Queries;
 

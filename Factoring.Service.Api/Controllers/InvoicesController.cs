@@ -1,7 +1,7 @@
 using Factoring.Service.Application.Invoices.Commands;
 using Factoring.Service.Application.Invoices.Queries;
 using Microsoft.AspNetCore.Mvc;
-using MediatR;
+using Factoring.Service.Application.Common;
 
 namespace Factoring.Service.Api.Controllers;
 
@@ -25,7 +25,7 @@ public class InvoicesController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetInvoicesById(Guid id)
     {
-        var query = new GetInvoiceByIdQuery { Id = id };
+        var query = new GetInvoiceByIdQuery (id);
         var result = await _mediator.Send(query);
         
         if (result == null) return NotFound();
@@ -38,6 +38,7 @@ public class InvoicesController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> FinanceInvoice(Guid id)
     {
         var command = new FinanceInvoiceCommand(id);
+        // await _mediator.Send(command);
         await _mediator.Send(command);
 
         Console.WriteLine($"Invoice {id} financed via API.");

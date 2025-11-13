@@ -1,6 +1,6 @@
+using Factoring.Service.Application.Common;
 using Factoring.Service.Core.Interfaces;
 using Factoring.Service.Core.Models;
-using MediatR;
 
 namespace Factoring.Service.Application.Invoices.Commands;
 

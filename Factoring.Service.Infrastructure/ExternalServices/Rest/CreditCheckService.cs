@@ -1,5 +1,3 @@
-using System.Net.Http.Json;
-using System.Text.Json;
 using Factoring.Service.Core.Interfaces;
 using Factoring.Service.Core.Interfaces.IExternalServices;
 

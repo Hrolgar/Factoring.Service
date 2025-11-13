@@ -1,9 +1,19 @@
+using AutoMapper;
 using Factoring.Service.Application.Dtos;
-using MediatR;
+using Factoring.Service.Application.Common;
+using Factoring.Service.Core.Interfaces;
 
 namespace Factoring.Service.Application.Invoices.Queries;
 
-public class GetInvoiceByIdQuery : IRequest<InvoiceDto>
+public record GetInvoiceByIdQuery (Guid Id) : IRequest<InvoiceDto>;
+
+public class GetInvoiceByIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    : IRequestHandler<GetInvoiceByIdQuery, InvoiceDto>
 {
-    public Guid Id { get; set; }
+    public async Task<InvoiceDto> Handle(GetInvoiceByIdQuery request, CancellationToken cancellationToken)
+    {
+        var invoice =  await unitOfWork.Invoices.GetByIdAsync(request.Id);
+        var invoiceDto = mapper.Map<InvoiceDto>(invoice);
+        return invoiceDto;
+    }
 }
