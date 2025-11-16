@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
       <UserSecretsId>3903c67c-e242-40c7-801e-a2ac6d319049</UserSecretsId>
   </PropertyGroup>
-    
+
     <ItemGroup>
         <ProjectReference Include="..\Factoring.Service.Application\Factoring.Service.Application.csproj" />
         <ProjectReference Include="..\Factoring.Service.Core\Factoring.Service.Core.csproj" />

@@ -8,6 +8,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factoring.Service.Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factoring.Service.Application", "Factoring.Service.Application\Factoring.Service.Application.csproj", "{F575E6BB-FD9E-46C9-A392-8F90EEAB5D66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factoring.Service.Application.UnitTests", "Factoring.Service.Application.UnitTests\Factoring.Service.Application.UnitTests.csproj", "{0F6D37BF-11A8-498A-807A-050CB6AF7481}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factoring.Service.Api.IntegrationTests", "Factoring.Service.Api.IntegrationTests\Factoring.Service.Api.IntegrationTests.csproj", "{10948410-4612-4348-9164-A9069A609ACF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7707FC9B-9BF5-4A2B-826E-724B17DE4FA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +36,17 @@ Global
 		{F575E6BB-FD9E-46C9-A392-8F90EEAB5D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F575E6BB-FD9E-46C9-A392-8F90EEAB5D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F575E6BB-FD9E-46C9-A392-8F90EEAB5D66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6D37BF-11A8-498A-807A-050CB6AF7481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6D37BF-11A8-498A-807A-050CB6AF7481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6D37BF-11A8-498A-807A-050CB6AF7481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6D37BF-11A8-498A-807A-050CB6AF7481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10948410-4612-4348-9164-A9069A609ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10948410-4612-4348-9164-A9069A609ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10948410-4612-4348-9164-A9069A609ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10948410-4612-4348-9164-A9069A609ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10948410-4612-4348-9164-A9069A609ACF} = {7707FC9B-9BF5-4A2B-826E-724B17DE4FA2}
+		{0F6D37BF-11A8-498A-807A-050CB6AF7481} = {7707FC9B-9BF5-4A2B-826E-724B17DE4FA2}
 	EndGlobalSection
 EndGlobal

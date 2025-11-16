@@ -72,32 +72,6 @@ builder.Services.AddSwaggerGen(options =>
             new string[] {}
         }
     });
-    
-    // options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    // {
-    //     Scheme = "Bearer",
-    //     BearerFormat = "JWT",
-    //     In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-    //     Name = "Authorization",
-    //     Description = "Enter: Bearer {your token}",
-    //     Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http
-    // });
-    //
-    //
-    // options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-    // {
-    //     {
-    //         new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    //         {
-    //             Reference = new Microsoft.OpenApi.Models.OpenApiReference
-    //             {
-    //                 Id = "Bearer",
-    //                 Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme
-    //             }
-    //         },
-    //         Array.Empty<string>()
-    //     }
-    // });
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -146,3 +120,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
+public partial class Program { }
